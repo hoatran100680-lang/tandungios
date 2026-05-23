@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Phantom Ultimate Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- KHUNG ĐIỆN THOẠI CHÍNH -->
+    <div class="menu-container">
+        
+        <!-- 1. HEADER (ÉP CỐ ĐỊNH Ở ĐỈNH) -->
+        <div class="header">
+            <div>
+                <div class="brand-title">PHANTOM</div>
+                <div class="brand-subtitle">ULTIMATE ASSISTANT</div>
+            </div>
+            <div class="status-box">
+                STATUS<br><span class="status-online">UNDETECTED</span>
+            </div>
+        </div>
+
+        <!-- 2. KHUNG CHỨA NỘI DUNG CUỘN -->
+        <div class="tab-content-wrapper">
+
+                            <div id="tab-home" class="tab-panel active">
+            <div class="card admin-card" style="text-align: center;">
+                <div class="card-title">✨ GIỚI THIỆU ADMIN</div>
+                <!-- KHUNG TRÒN PHÁT SÁNG ÉP CHẾT STYLE INLINE CHỐNG LỖI CSS -->
+                <div style="width: 85px; height: 85px; margin: 12px auto; border-radius: 50%; padding: 3px; background: linear-gradient(to right, #00d2ff, #0066ff); box-shadow: 0 0 15px rgba(0, 102, 255, 0.6); display: flex; justify-content: center; align-items: center; overflow: hidden !important;">
+                    <img src="https://i.ibb.co/zW9T90Sv/avtadmin.jpg[/img]" alt="Admin Avatar" style="width: 100% !important; height: 100% !important; border-radius: 50% !important; object-fit: cover !important; display: block !important;">
+                </div>
+                <h3 class="admin-name">VŨ SANG</h3>                    
+                    <a href="https://www.facebook.com/share/1Boi5ZMoeC/?mibextid=wwXIfr" target="_blank" class="btn-link fb-color">🌐 Liên kết Facebook</a>
+                    <a href="0937198325" target="_blank" class="btn-link zalo-color">💬 Liên hệ Zalo</a>
+                    <a href="https://www.tiktok.com/@vusang_lovetiktok?_r=1&_t=ZS-96ardQtSQjp" target="_blank" class="btn-link tt-color">🎵 Kênh TikTok</a>
+                </div>
+                
+                <div class="card">
+                    <div class="card-title">ℹ️ THÔNG TIN TRẠNG THÁI</div>
+                    <p class="desc-text">
+                        Hệ thống điều khiển Phantom Ultimate đang vận hành ổn định. Đã đặt trạng thái ban đầu mặc định tắt toàn bộ để người dùng tự kích hoạt.
+                    </p>
+                </div>
+            </div>
+
+            <!-- TAB 2: FUNC (7 Công tắc - Đặt mặc định TẮT HẾT) -->
+            <div id="tab-func" class="tab-panel">
+                <div class="card">
+                    <div class="card-title">🎯 CHỨC NĂNG HỖ TRỢ (FUNC)</div>
+                    <div class="row-item"><span class="row-label">1. Tự động khóa mục tiêu (Aimbot)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="row-item"><span class="row-label">2. Bắn không tâm (Silent Aim)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="row-item"><span class="row-label">3. Hiện khung hộp (ESP Box)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="row-item"><span class="row-label">4. Hiện tâm xương (ESP Skeleton)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="row-item"><span class="row-label">5. Hiện vạch máu (ESP Health)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="row-item"><span class="row-label">6. Giảm sương mù đồ họa (No Fog)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="row-item"><span class="row-label">7. Tối ưu thay đạn (Fast Reload)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                </div>
+            </div>
+
+            <!-- TAB 3: BOOST (7 Thanh kéo - Đặt mặc định VỀ 0 HẾT) -->
+            <div id="tab-boost" class="tab-panel">
+                <div class="card">
+                    <div class="card-title">⚡ TỐI ƯU TỐC ĐỘ (BOOST)</div>
+                    <div class="slider-container"><div class="slider-header"><span>1. Tốc độ quét (Smooth Aim)</span><span id="v1">0%</span></div><input type="range" class="range-input" min="0" max="100" value="0" data-target="v1" data-suffix="%"></div>
+                    <div class="slider-container"><div class="slider-header"><span>2. Độ nhạy khóa (Lock Speed)</span><span id="v2">0%</span></div><input type="range" class="range-input" min="0" max="100" value="0" data-target="v2" data-suffix="%"></div>
+                    <div class="slider-container"><div class="slider-header"><span>3. Phạm vi quét (FOV Size)</span><span id="v3">0°</span></div><input type="range" class="range-input" min="0" max="360" value="0" data-target="v3" data-suffix="°"></div>
+                    <div class="slider-container"><div class="slider-header"><span>4. Hạn chế độ giật (Anti Recoil)</span><span id="v4">0%</span></div><input type="range" class="range-input" min="0" max="100" value="0" data-target="v4" data-suffix="%"></div>
+                    <div class="slider-container"><div class="slider-header"><span>5. Tỉ lệ trúng đích (Hit Rate)</span><span id="v5">0%</span></div><input type="range" class="range-input" min="0" max="100" value="0" data-target="v5" data-suffix="%"></div>
+                    <div class="slider-container"><div class="slider-header"><span>6. Giới hạn hình ảnh (FPS Lock)</span><span id="v6">0 FPS</span></div><input type="range" class="range-input" min="0" max="144" value="0" data-target="v6" data-suffix=" FPS"></div>
+                    <div class="slider-container"><div class="slider-header"><span>7. Ép xung nhân xử lý (Core Turbo)</span><span id="v7">0%</span></div><input type="range" class="range-input" min="0" max="100" value="0" data-target="v7" data-suffix="%"></div>
+                </div>
+            </div>
+
+            <!-- TAB 4: LIVE -->
+            <div id="tab-live" class="tab-panel">
+                <div class="card ram-box">
+                    <div class="card-title">📊 BIỂU ĐỒ RAM REALTIME</div>
+                    <div class="svg-chart-wrapper">
+                        <svg viewBox="0 0 200 60" class="ram-svg-line">
+                            <path id="ramPath" d="M 0,40 Q 25,35 50,45 T 100,30 T 150,50 T 200,35" fill="none" stroke="#a855f7" stroke-width="2.5"></path>
+                        </svg>
+                        <div class="ram-usage-glow" id="ram-text">45%</div>
+                    </div>
+                    <p class="ram-desc">Lượng tài nguyên bộ nhớ RAM đang tiêu thụ</p>
+                    <button class="btn-action" id="btn-clean-ram">🧹 DỌN SẠCH BỘ NHỚ RAM</button>
+                </div>
+                <div class="card">
+                    <div class="card-title">💻 THỰC THI LOG CODE ĐANG CHẠY</div>
+                    <div class="code-log" id="log-box">[SYSTEM] Khởi động trình theo dõi luồng LIVE...</div>
+                </div>
+            </div>
+
+            <!-- TAB 5: CÀI ĐẶT -->
+            <div id="tab-settings" class="tab-panel">
+                <div class="card">
+                    <div class="card-title">⚙️ CÀI ĐẶT CẤU HÌNH TÙY CHỌN</div>
+                    <div class="setting-item">
+                        <label class="select-label">Lựa chọn ngôn ngữ</label>
+                        <select class="select-input"><option>Tiếng Việt</option><option>English</option></select>
+                    </div>
+                    <div class="setting-item">
+                        <label class="select-label">Chế độ giao diện đồ họa</label>
+                        <select class="select-input"><option>Tối Neon Tím</option><option>Đen Amoled</option></select>
+                    </div>
+                    <div class="row-item"><span class="row-label">Tự động cập nhật phiên bản</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                    <div class="row-item"><span class="row-label">Âm báo phản hồi hiệu ứng</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                </div>
+                <div class="footer-credit">Phantom Assistant Ultimate v6.2<br>Phát triển bởi Vũ Sang © 2026</div>
+            </div>
+
+        </div> <!-- Hết khung cuộn -->
+
+        <!-- 3. THANH ĐIỀU HƯỚNG ÉP CHẾT NẰM Ở ĐÁY MENU -->
+        <div class="bottom-nav">
+            <div class="nav-item active" data-tab="tab-home">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-text">HOME</div>
+            </div>
+            <div class="nav-item" data-tab="tab-func">
+                <div class="nav-icon">🎯</div>
+                <div class="nav-text">FUNC</div>
+            </div>
+            <div class="nav-item" data-tab="tab-boost">
+                <div class="nav-icon">🚀</div>
+                <div class="nav-text">BOOST</div>
+            </div>
+            <div class="nav-item" data-tab="tab-live">
+                <div class="nav-icon">📡</div>
+                <div class="nav-text">LIVE</div>
+            </div>
+            <div class="nav-item" data-tab="tab-settings">
+                <div class="nav-icon">⚙️</div>
+                <div class="nav-text">CÀI ĐẶT</div>
+            </div>
+        </div>
+
+    </div> <!-- Hết khung chính -->
+
+    <script src="script.js"></script>
+</body>
+</html>
