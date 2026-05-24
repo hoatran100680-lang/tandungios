@@ -1,144 +1,582 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Phantom Ultimate Menu</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PHANTOM X ELITE</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
 </head>
+
 <body>
 
-    <!-- KHUNG ĐIỆN THOẠI CHÍNH -->
-    <div class="menu-container">
-        
-        <!-- 1. HEADER (ÉP CỐ ĐỊNH Ở ĐỈNH) -->
-        <div class="header">
-            <div>
-                <div class="brand-title">PHANTOM</div>
-                <div class="brand-subtitle">ULTIMATE ASSISTANT</div>
-            </div>
-            <div class="status-box">
-                STATUS<br><span class="status-online">UNDETECTED</span>
-            </div>
-        </div>
+<!-- LOADER -->
 
-        <!-- 2. KHUNG CHỨA NỘI DUNG CUỘN -->
-        <div class="tab-content-wrapper">
+<div class="loader">
 
-                            <div id="tab-home" class="tab-panel active">
-            <div class="card admin-card" style="text-align: center;">
-                <div class="card-title">✨ GIỚI THIỆU ADMIN</div>
-                <!-- KHUNG TRÒN PHÁT SÁNG ÉP CHẾT STYLE INLINE CHỐNG LỖI CSS -->
-                <div style="width: 85px; height: 85px; margin: 12px auto; border-radius: 50%; padding: 3px; background: linear-gradient(to right, #00d2ff, #0066ff); box-shadow: 0 0 15px rgba(0, 102, 255, 0.6); display: flex; justify-content: center; align-items: center; overflow: hidden !important;">
-                    <img src="https://i.ibb.co/zW9T90Sv/avtadmin.jpg[/img]" alt="Admin Avatar" style="width: 100% !important; height: 100% !important; border-radius: 50% !important; object-fit: cover !important; display: block !important;">
-                </div>
-                <h3 class="admin-name">VŨ SANG</h3>                    
-                    <a href="https://www.facebook.com/share/1Boi5ZMoeC/?mibextid=wwXIfr" target="_blank" class="btn-link fb-color">🌐 Liên kết Facebook</a>
-                    <a href="0937198325" target="_blank" class="btn-link zalo-color">💬 Liên hệ Zalo</a>
-                    <a href="https://www.tiktok.com/@vusang_lovetiktok?_r=1&_t=ZS-96ardQtSQjp" target="_blank" class="btn-link tt-color">🎵 Kênh TikTok</a>
-                </div>
-                
-                <div class="card">
-                    <div class="card-title">ℹ️ THÔNG TIN TRẠNG THÁI</div>
-                    <p class="desc-text">
-                        Hệ thống điều khiển Phantom Ultimate đang vận hành ổn định. Đã đặt trạng thái ban đầu mặc định tắt toàn bộ để người dùng tự kích hoạt.
-                    </p>
-                </div>
-            </div>
+<div class="loader-ring"></div>
 
-            <!-- TAB 2: FUNC (7 Công tắc - Đặt mặc định TẮT HẾT) -->
-            <div id="tab-func" class="tab-panel">
-                <div class="card">
-                    <div class="card-title">🎯 CHỨC NĂNG HỖ TRỢ (FUNC)</div>
-                    <div class="row-item"><span class="row-label">1. Tự động khóa mục tiêu (Aimbot)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="row-item"><span class="row-label">2. Bắn không tâm (Silent Aim)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="row-item"><span class="row-label">3. Hiện khung hộp (ESP Box)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="row-item"><span class="row-label">4. Hiện tâm xương (ESP Skeleton)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="row-item"><span class="row-label">5. Hiện vạch máu (ESP Health)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="row-item"><span class="row-label">6. Giảm sương mù đồ họa (No Fog)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="row-item"><span class="row-label">7. Tối ưu thay đạn (Fast Reload)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                </div>
-            </div>
+<h1>PHANTOM X</h1>
 
-            <!-- TAB 3: BOOST (7 Thanh kéo - Đặt mặc định VỀ 0 HẾT) -->
-            <div id="tab-boost" class="tab-panel">
-                <div class="card">
-                    <div class="card-title">⚡ TỐI ƯU TỐC ĐỘ (BOOST)</div>
-                    <div class="slider-container"><div class="slider-header"><span>1. Tốc độ quét (Smooth Aim)</span><span id="v1">0%</span></div><input type="range" class="range-input" min="0" max="100" value="0" data-target="v1" data-suffix="%"></div>
-                    <div class="slider-container"><div class="slider-header"><span>2. Độ nhạy khóa (Lock Speed)</span><span id="v2">0%</span></div><input type="range" class="range-input" min="0" max="100" value="0" data-target="v2" data-suffix="%"></div>
-                    <div class="slider-container"><div class="slider-header"><span>3. Phạm vi quét (FOV Size)</span><span id="v3">0°</span></div><input type="range" class="range-input" min="0" max="360" value="0" data-target="v3" data-suffix="°"></div>
-                    <div class="slider-container"><div class="slider-header"><span>4. Hạn chế độ giật (Anti Recoil)</span><span id="v4">0%</span></div><input type="range" class="range-input" min="0" max="100" value="0" data-target="v4" data-suffix="%"></div>
-                    <div class="slider-container"><div class="slider-header"><span>5. Tỉ lệ trúng đích (Hit Rate)</span><span id="v5">0%</span></div><input type="range" class="range-input" min="0" max="100" value="0" data-target="v5" data-suffix="%"></div>
-                    <div class="slider-container"><div class="slider-header"><span>6. Giới hạn hình ảnh (FPS Lock)</span><span id="v6">0 FPS</span></div><input type="range" class="range-input" min="0" max="144" value="0" data-target="v6" data-suffix=" FPS"></div>
-                    <div class="slider-container"><div class="slider-header"><span>7. Ép xung nhân xử lý (Core Turbo)</span><span id="v7">0%</span></div><input type="range" class="range-input" min="0" max="100" value="0" data-target="v7" data-suffix="%"></div>
-                </div>
-            </div>
+</div>
 
-            <!-- TAB 4: LIVE -->
-            <div id="tab-live" class="tab-panel">
-                <div class="card ram-box">
-                    <div class="card-title">📊 BIỂU ĐỒ RAM REALTIME</div>
-                    <div class="svg-chart-wrapper">
-                        <svg viewBox="0 0 200 60" class="ram-svg-line">
-                            <path id="ramPath" d="M 0,40 Q 25,35 50,45 T 100,30 T 150,50 T 200,35" fill="none" stroke="#a855f7" stroke-width="2.5"></path>
-                        </svg>
-                        <div class="ram-usage-glow" id="ram-text">45%</div>
-                    </div>
-                    <p class="ram-desc">Lượng tài nguyên bộ nhớ RAM đang tiêu thụ</p>
-                    <button class="btn-action" id="btn-clean-ram">🧹 DỌN SẠCH BỘ NHỚ RAM</button>
-                </div>
-                <div class="card">
-                    <div class="card-title">💻 THỰC THI LOG CODE ĐANG CHẠY</div>
-                    <div class="code-log" id="log-box">[SYSTEM] Khởi động trình theo dõi luồng LIVE...</div>
-                </div>
-            </div>
+<!-- APP -->
 
-            <!-- TAB 5: CÀI ĐẶT -->
-            <div id="tab-settings" class="tab-panel">
-                <div class="card">
-                    <div class="card-title">⚙️ CÀI ĐẶT CẤU HÌNH TÙY CHỌN</div>
-                    <div class="setting-item">
-                        <label class="select-label">Lựa chọn ngôn ngữ</label>
-                        <select class="select-input"><option>Tiếng Việt</option><option>English</option></select>
-                    </div>
-                    <div class="setting-item">
-                        <label class="select-label">Chế độ giao diện đồ họa</label>
-                        <select class="select-input"><option>Tối Neon Tím</option><option>Đen Amoled</option></select>
-                    </div>
-                    <div class="row-item"><span class="row-label">Tự động cập nhật phiên bản</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                    <div class="row-item"><span class="row-label">Âm báo phản hồi hiệu ứng</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                </div>
-                <div class="footer-credit">Phantom Assistant Ultimate v6.2<br>Phát triển bởi Vũ Sang © 2026</div>
-            </div>
+<div class="app">
 
-        </div> <!-- Hết khung cuộn -->
+<div class="bg-glow"></div>
 
-        <!-- 3. THANH ĐIỀU HƯỚNG ÉP CHẾT NẰM Ở ĐÁY MENU -->
-        <div class="bottom-nav">
-            <div class="nav-item active" data-tab="tab-home">
-                <div class="nav-icon">🏠</div>
-                <div class="nav-text">HOME</div>
-            </div>
-            <div class="nav-item" data-tab="tab-func">
-                <div class="nav-icon">🎯</div>
-                <div class="nav-text">FUNC</div>
-            </div>
-            <div class="nav-item" data-tab="tab-boost">
-                <div class="nav-icon">🚀</div>
-                <div class="nav-text">BOOST</div>
-            </div>
-            <div class="nav-item" data-tab="tab-live">
-                <div class="nav-icon">📡</div>
-                <div class="nav-text">LIVE</div>
-            </div>
-            <div class="nav-item" data-tab="tab-settings">
-                <div class="nav-icon">⚙️</div>
-                <div class="nav-text">CÀI ĐẶT</div>
-            </div>
-        </div>
+<div class="particles"></div>
 
-    </div> <!-- Hết khung chính -->
+<!-- TOPBAR -->
 
-    <script src="script.js"></script>
+<div class="topbar">
+
+<div class="time">
+18:30
+</div>
+
+<div class="top-icons">
+
+<i class="fas fa-signal"></i>
+<i class="fas fa-wifi"></i>
+<i class="fas fa-battery-full"></i>
+
+</div>
+
+</div>
+
+<!-- CONTENT -->
+
+<div class="content">
+
+<!-- HOME -->
+
+<section class="panel active" id="home">
+
+<h2 class="page-title">
+HOME
+</h2>
+
+<div class="hero-card">
+
+<div class="hero-ring"></div>
+
+<img
+class="hero-img"
+src="https://i.ibb.co/7xf3ygny/2a-Obo-QYi-JQb9-Xyhw4-HU9lx-Vt-U1vz-CSGmj-PWBAXx-I.jpg[/img]"
+/>
+
+<div class="hero-info">
+
+<h1>FREE FIRE</h1>
+
+<h3>PHANTOM X ELITE</h3>
+
+<p>
+Ultimate futuristic gaming dashboard with premium realtime monitor system.
+</p>
+
+</div>
+
+</div>
+
+<div class="stats-grid">
+
+<div class="stats-card">
+<i class="fas fa-shield-halved"></i>
+<h4>SECURE</h4>
+<p>100% Stable</p>
+</div>
+
+<div class="stats-card">
+<i class="fas fa-bolt"></i>
+<h4>FAST</h4>
+<p>Ultra Speed</p>
+</div>
+
+<div class="stats-card">
+<i class="fas fa-rocket"></i>
+<h4>BOOST</h4>
+<p>120 FPS</p>
+</div>
+
+</div>
+
+<div class="main-card">
+
+<div class="main-card-top">
+
+<div>
+<h3>PREMIUM STATUS</h3>
+<p>Realtime optimization enabled</p>
+</div>
+
+<div class="vip-badge">
+VIP
+</div>
+
+</div>
+
+<div class="progress">
+<div class="progress-bar"></div>
+</div>
+
+</div>
+
+<button class="main-btn">
+<i class="fas fa-play"></i>
+START SYSTEM
+</button>
+
+</section>
+
+<!-- FUNC -->
+
+<section class="panel" id="func">
+
+<h2 class="page-title">
+FUNC
+</h2>
+
+<div class="section-title">
+ADVANCED FUNCTIONS
+<span>PRO GAMING SYSTEM</span>
+</div>
+
+<div class="card-list">
+
+<div class="toggle-card">
+
+<div class="left">
+
+<div class="icon purple">
+<i class="fas fa-crosshairs"></i>
+</div>
+
+<div>
+<h3>AIM ASSIST</h3>
+<p>Target support system</p>
+</div>
+
+</div>
+
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+
+</div>
+
+<div class="toggle-card">
+
+<div class="left">
+
+<div class="icon blue">
+<i class="fas fa-eye"></i>
+</div>
+
+<div>
+<h3>ESP VISION</h3>
+<p>Enhanced visual tracking</p>
+</div>
+
+</div>
+
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+
+</div>
+
+<div class="toggle-card">
+
+<div class="left">
+
+<div class="icon pink">
+<i class="fas fa-bullseye"></i>
+</div>
+
+<div>
+<h3>HEAD LOCK</h3>
+<p>Precision tracking</p>
+</div>
+
+</div>
+
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+
+</div>
+
+<div class="toggle-card">
+
+<div class="left">
+
+<div class="icon green">
+<i class="fas fa-fire"></i>
+</div>
+
+<div>
+<h3>NO RECOIL</h3>
+<p>Weapon stabilization</p>
+</div>
+
+</div>
+
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+
+</div>
+
+<div class="toggle-card">
+
+<div class="left">
+
+<div class="icon orange">
+<i class="fas fa-person-running"></i>
+</div>
+
+<div>
+<h3>SPEED BOOST</h3>
+<p>Movement acceleration</p>
+</div>
+
+</div>
+
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+
+</div>
+
+<div class="toggle-card">
+
+<div class="left">
+
+<div class="icon cyan">
+<i class="fas fa-location-crosshairs"></i>
+</div>
+
+<div>
+<h3>AUTO TRACK</h3>
+<p>Realtime lock system</p>
+</div>
+
+</div>
+
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+
+</div>
+
+<div class="toggle-card">
+
+<div class="left">
+
+<div class="icon red">
+<i class="fas fa-skull"></i>
+</div>
+
+<div>
+<h3>DAMAGE BOOST</h3>
+<p>Advanced damage engine</p>
+</div>
+
+</div>
+
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- BOOST -->
+
+<section class="panel" id="boost">
+
+<h2 class="page-title">
+BOOST
+</h2>
+
+<div class="section-title">
+BOOST ENGINE
+<span>ADVANCED OPTIMIZER</span>
+</div>
+
+<div class="slider-box">
+
+<div class="slider-item">
+<div class="slider-top">
+<span>HEADSHOT</span>
+<b id="v1">0%</b>
+</div>
+<input type="range" min="0" max="100" value="0" class="range" id="s1">
+</div>
+
+<div class="slider-item">
+<div class="slider-top">
+<span>AIM SPEED</span>
+<b id="v2">0%</b>
+</div>
+<input type="range" min="0" max="100" value="0" class="range" id="s2">
+</div>
+
+<div class="slider-item">
+<div class="slider-top">
+<span>FPS BOOST</span>
+<b id="v3">0%</b>
+</div>
+<input type="range" min="0" max="100" value="0" class="range" id="s3">
+</div>
+
+<div class="slider-item">
+<div class="slider-top">
+<span>RAM CLEAN</span>
+<b id="v4">0%</b>
+</div>
+<input type="range" min="0" max="100" value="0" class="range" id="s4">
+</div>
+
+<div class="slider-item">
+<div class="slider-top">
+<span>NETWORK</span>
+<b id="v5">0%</b>
+</div>
+<input type="range" min="0" max="100" value="0" class="range" id="s5">
+</div>
+
+<div class="slider-item">
+<div class="slider-top">
+<span>SENSITIVITY</span>
+<b id="v6">0%</b>
+</div>
+<input type="range" min="0" max="100" value="0" class="range" id="s6">
+</div>
+
+<div class="slider-item">
+<div class="slider-top">
+<span>CPU TURBO</span>
+<b id="v7">0%</b>
+</div>
+<input type="range" min="0" max="100" value="0" class="range" id="s7">
+</div>
+
+</div>
+
+<button class="main-btn" id="boostBtn">
+
+<i class="fas fa-rocket"></i>
+
+BOOST DEVICE
+
+</button>
+
+</section>
+
+<!-- LIVE -->
+
+<section class="panel" id="live">
+
+<h2 class="page-title">
+LIVE
+</h2>
+
+<div class="section-title">
+LIVE MONITOR
+<span>REALTIME PERFORMANCE</span>
+</div>
+
+<div class="live-grid">
+
+<div class="mini-card">
+<i class="fas fa-memory"></i>
+<h3>RAM</h3>
+<p id="ramPercent">42%</p>
+</div>
+
+<div class="mini-card">
+<i class="fas fa-microchip"></i>
+<h3>CPU</h3>
+<p id="cpuPercent">35%</p>
+</div>
+
+<div class="mini-card">
+<i class="fas fa-temperature-half"></i>
+<h3>TEMP</h3>
+<p>37°C</p>
+</div>
+
+<div class="mini-card">
+<i class="fas fa-gauge-high"></i>
+<h3>FPS</h3>
+<p>120</p>
+</div>
+
+</div>
+
+<div class="live-card">
+
+<div class="chart">
+
+<div class="chart-grid"></div>
+
+<div class="chart-line"></div>
+
+</div>
+
+</div>
+
+<div class="console" id="console">
+
+<p>[18:30:01] SYSTEM READY...</p>
+
+</div>
+
+</section>
+
+<!-- SETTINGS -->
+
+<section class="panel" id="settings">
+
+<h2 class="page-title">
+SETTINGS
+</h2>
+
+<div class="section-title">
+SYSTEM SETTINGS
+<span>ADVANCED CONFIGURATION</span>
+</div>
+
+<div class="settings-list">
+
+<div class="setting-card">
+<i class="fas fa-user"></i>
+<span>Account</span>
+<i class="fas fa-chevron-right"></i>
+</div>
+
+<div class="setting-card">
+<i class="fas fa-language"></i>
+<span>Language</span>
+<i class="fas fa-chevron-right"></i>
+</div>
+
+<div class="setting-card">
+<i class="fas fa-palette"></i>
+<span>Theme</span>
+<i class="fas fa-chevron-right"></i>
+</div>
+
+<div class="setting-card">
+<i class="fas fa-volume-high"></i>
+<span>Sound Effects</span>
+
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+
+</div>
+
+<div class="setting-card">
+<i class="fas fa-bell"></i>
+<span>Notifications</span>
+
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+
+</div>
+
+<div class="setting-card">
+<i class="fas fa-shield-halved"></i>
+<span>Security Protection</span>
+
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+
+</div>
+
+<div class="setting-card">
+<i class="fas fa-cloud-arrow-up"></i>
+<span>Cloud Backup</span>
+<i class="fas fa-chevron-right"></i>
+</div>
+
+<div class="setting-card">
+<i class="fas fa-circle-info"></i>
+<span>Version 5.0 Elite</span>
+</div>
+
+<div class="setting-card logout">
+<i class="fas fa-right-from-bracket"></i>
+<span>Logout</span>
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<!-- TABBAR -->
+
+<div class="tabbar">
+
+<div class="tab active" data-tab="home">
+<i class="fas fa-house"></i>
+<span>HOME</span>
+</div>
+
+<div class="tab" data-tab="func">
+<i class="fas fa-th-large"></i>
+<span>FUNC</span>
+</div>
+
+<div class="tab" data-tab="boost">
+<i class="fas fa-rocket"></i>
+<span>BOOST</span>
+</div>
+
+<div class="tab" data-tab="live">
+<i class="fas fa-chart-line"></i>
+<span>LIVE</span>
+</div>
+
+<div class="tab" data-tab="settings">
+<i class="fas fa-gear"></i>
+<span>SETTINGS</span>
+</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>

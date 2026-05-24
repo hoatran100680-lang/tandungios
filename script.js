@@ -1,99 +1,208 @@
-document.addEventListener("DOMContentLoaded", () => {
-    
-    // ==========================================
-    // KHỞI TẠO ĐỐI TƯỢNG HỆ THỐNG ÂM THANH (AUDIO)
-    // ==========================================
-    const switchSound = new Audio("https://mixkit.co");
-    switchSound.volume = 0.5;
+/* TAB SYSTEM */
 
-    const sliderSound = new Audio("https://mixkit.co");
-    sliderSound.volume = 0.3;
+const tabs =
+document.querySelectorAll(".tab");
 
-    // --- 1. SỰ KIỆN CLICK CHUYỂN TAB ---
-    const navItems = document.querySelectorAll(".nav-item");
-    const tabPanels = document.querySelectorAll(".tab-panel");
+const panels =
+document.querySelectorAll(".panel");
 
-    navItems.forEach(item => {
-        item.addEventListener("click", () => {
-            switchSound.currentTime = 0;
-            switchSound.play().catch(() => {});
+tabs.forEach(tab=>{
 
-            navItems.forEach(nav => nav.classList.remove("active"));
-            tabPanels.forEach(panel => panel.classList.remove("active"));
+tab.addEventListener("click",()=>{
 
-            item.classList.add("active");
-            const targetTabId = item.getAttribute("data-tab");
-            const currentPanel = document.getElementById(targetTabId);
-            
-            if (currentPanel) {
-                currentPanel.classList.add("active");
-            }
-        });
-    });
-
-    // --- 2. CÔNG TẮC BẬT/TẮT: PHÁT ÂM THANH KHI GẠT ---
-    const switches = document.querySelectorAll(".switch input");
-    switches.forEach(checkbox => {
-        checkbox.addEventListener("change", () => {
-            switchSound.currentTime = 0;
-            switchSound.play().catch(() => {});
-        });
-    });
-
-    // --- 3. THANH TRƯỢT KÉO: PHÁT ÂM THANH KHI KÉO VÀ CẬP NHẬT GIÁ TRỊ ---
-    const rangeInputs = document.querySelectorAll(".range-input");
-    rangeInputs.forEach(input => {
-        input.addEventListener("input", () => {
-            const targetId = input.getAttribute("data-target");
-            const suffix = input.getAttribute("data-suffix");
-            const textIndicator = document.getElementById(targetId);
-            if (textIndicator) {
-                textIndicator.innerText = input.value + suffix;
-            }
-
-            // Phát âm thanh tick nhẹ liên tục khi dịch chuyển giá trị slider
-            sliderSound.currentTime = 0;
-            sliderSound.play().catch(() => {});
-        });
-    });
-
-    // --- 4. ĐỒ HỌA SÓNG SVG REALTIME & LOG CODE (LIVE) ---
-    const ramText = document.getElementById("ram-text");
-    const ramPath = document.getElementById("ramPath");
-    const logBox = document.getElementById("log-box");
-
-    setInterval(() => {
-        if (ramText && ramPath) {
-            let randomRam = Math.floor(Math.random() * (73 - 41 + 1)) + 41;
-            ramText.innerText = randomRam + "%";
-
-            let p1 = Math.floor(Math.random() * (45 - 25)) + 25;
-            let p2 = Math.floor(Math.random() * (55 - 35)) + 35;
-            let p3 = Math.floor(Math.random() * (40 - 20)) + 20;
-            let p4 = Math.floor(Math.random() * (55 - 40)) + 40;
-            ramPath.setAttribute("d", `M 0,${p1} Q 25,${p2} 50,${p1} T 100,${p3} T 150,${p4} T 200,${p3}`);
-
-            if (Math.random() > 0.4 && logBox) {
-                let time = new Date().toLocaleTimeString();
-                let randomHex = Math.floor(Math.random()*16777215).toString(16).toUpperCase();
-                logBox.innerHTML += `<br>[${time}] Run process code memory at: 0x${randomHex}`;
-                logBox.scrollTop = logBox.scrollHeight;
-            }
-        }
-    }, 1500);
-
-    // --- 5. CHỨC NĂNG DỌN RAM ---
-    const btnCleanRam = document.getElementById("btn-clean-ram");
-    if (btnCleanRam) {
-        btnCleanRam.addEventListener("click", () => {
-            if (ramText && ramPath && logBox) {
-                ramText.innerText = "14%";
-                ramPath.setAttribute("d", "M 0,55 Q 25,54 50,55 T 100,53 T 150,55 T 200,54");
-                let time = new Date().toLocaleTimeString();
-                logBox.innerHTML += `<br><span style="color:#a855f7; font-weight: bold;">[${time}] [CLEANER] Đã giải phóng 1.85 GB RAM thừa thành công.</span>`;
-                logBox.scrollTop = logBox.scrollHeight;
-                alert("Đã tối ưu hóa bộ nhớ RAM!");
-            }
-        });
-    }
+tabs.forEach(btn=>{
+btn.classList.remove("active");
 });
+
+panels.forEach(panel=>{
+panel.classList.remove("active");
+});
+
+tab.classList.add("active");
+
+document
+.getElementById(tab.dataset.tab)
+.classList.add("active");
+
+playSound();
+
+});
+
+});
+
+/* SOUND */
+
+function playSound(){
+
+const audio = new Audio(
+"https://www.soundjay.com/buttons/sounds/button-16.mp3"
+);
+
+audio.volume = .25;
+audio.play();
+
+}
+
+/* SWITCH SOUND */
+
+document.querySelectorAll("input")
+.forEach(sw=>{
+
+sw.addEventListener("change",()=>{
+
+playSound();
+
+const parent =
+sw.closest(".toggle-card");
+
+if(parent){
+
+parent.classList.toggle(
+"enabled",
+sw.checked
+);
+
+}
+
+});
+
+});
+
+/* RANGE VALUE */
+
+for(let i = 1; i <= 7; i++){
+
+const slider =
+document.getElementById(`s${i}`);
+
+const value =
+document.getElementById(`v${i}`);
+
+slider.addEventListener("input",()=>{
+
+value.innerText =
+slider.value + "%";
+
+});
+
+}
+
+/* BOOST BUTTON */
+
+const boostBtn =
+document.getElementById("boostBtn");
+
+const consoleBox =
+document.getElementById("console");
+
+boostBtn.addEventListener("click",()=>{
+
+playSound();
+
+const logs = [
+
+"SYSTEM BOOST START...",
+"CLEAR RAM SUCCESS...",
+"GPU OPTIMIZED...",
+"FPS BOOST ENABLED...",
+"NETWORK STABLE...",
+"SYSTEM READY..."
+
+];
+
+consoleBox.innerHTML = "";
+
+let i = 0;
+
+const inter = setInterval(()=>{
+
+if(i >= logs.length){
+
+clearInterval(inter);
+
+return;
+
+}
+
+const p =
+document.createElement("p");
+
+p.innerText =
+`[${new Date().toLocaleTimeString()}] ${logs[i]}`;
+
+consoleBox.appendChild(p);
+
+consoleBox.scrollTop =
+consoleBox.scrollHeight;
+
+i++;
+
+},700);
+
+});
+
+/* LIVE MONITOR */
+
+const cpu =
+document.getElementById("cpuPercent");
+
+const ram =
+document.getElementById("ramPercent");
+
+setInterval(()=>{
+
+const ramValue =
+Math.floor(Math.random()*40)+30;
+
+const cpuValue =
+Math.floor(Math.random()*50)+20;
+
+ram.innerText =
+ramValue + "%";
+
+cpu.innerText =
+cpuValue + "%";
+
+},3000);
+
+/* REALTIME CONSOLE */
+
+const liveLogs = [
+
+"Scanning system...",
+"FPS stable 120...",
+"GPU optimized...",
+"Ping stable...",
+"Realtime protection enabled...",
+"Network secured...",
+"RAM cleaned successfully..."
+
+];
+
+setInterval(()=>{
+
+const p =
+document.createElement("p");
+
+const random =
+liveLogs[
+Math.floor(Math.random()*liveLogs.length)
+];
+
+p.innerText =
+`[${new Date().toLocaleTimeString()}] ${random}`;
+
+consoleBox.appendChild(p);
+
+if(consoleBox.children.length > 12){
+
+consoleBox.removeChild(
+consoleBox.children[0]
+);
+
+}
+
+consoleBox.scrollTop =
+consoleBox.scrollHeight;
+
+},2500);
