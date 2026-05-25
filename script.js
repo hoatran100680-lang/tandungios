@@ -70,22 +70,24 @@ sw.checked
 
 /* RANGE VALUE */
 
-for(let i = 1; i <= 7; i++){
-
-const slider =
-document.getElementById(`s${i}`);
+document.querySelectorAll(".range")
+.forEach((slider)=>{
 
 const value =
-document.getElementById(`v${i}`);
-
-slider.addEventListener("input",()=>{
+slider.parentElement
+.querySelector("b");
 
 value.innerText =
 slider.value + "%";
 
-});
+slider.oninput = function(){
 
-}
+value.innerText =
+this.value + "%";
+
+};
+
+});
 
 /* BOOST BUTTON */
 
