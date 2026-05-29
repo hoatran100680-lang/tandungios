@@ -1,92 +1,88 @@
-// Cấu hình cổng kết nối API đồng bộ tuyệt đối với bot.py
-const API_URL = "http://localhost:5000/api";
 let sessionInterval = null;
 let ramChartInstance = null;
 
 // Khởi tạo các tính năng hệ thống khi ứng dụng sẵn sàng
 document.addEventListener("DOMContentLoaded", () => {
-    // Kiểm tra bộ nhớ tạm xem có phiên đăng nhập cũ chưa hết hạn không
+    // Kiểm tra phiên đăng nhập cũ trong bộ nhớ trình duyệt
     const savedKey = localStorage.getItem("phantom_key");
-    if (savedKey) {
-        autoVerifySavedKey(savedKey);
+    const savedExpire = localStorage.getItem("phantom_expire");
+    const savedType = localStorage.getItem("phantom_type");
+
+    if (savedKey && savedExpire && savedType) {
+        const now = new Date().getTime();
+        if (savedType === "vinhvien" || now < parseInt(savedExpire)) {
+            launchApplicationMenu(savedType, parseInt(savedExpire));
+        } else {
+            localStorage.clear();
+        }
     }
     
-    // Tạo sẵn luồng giả lập log console và biểu đồ hiển thị RAM
+    // Tạo luồng giả lập log console và biểu đồ hiển thị RAM
     initSystemTelemetry();
 });
 
 // ==========================================
-// 1. XỬ LÝ ĐĂNG NHẬP & ĐỒNG BỘ KEY XÁC THỰC
+// 1. XỬ LÝ ĐĂNG NHẬP OFFLINE (KHÔNG QUA MẠNG)
 // ==========================================
 
-async function validateKeyWithServer() {
+function validateKeyWithServer() {
     const btn = document.getElementById("btn-activate");
     const input = document.getElementById("key-input");
     const errorBox = document.getElementById("login-error");
-    const keyValue = input.value.trim();
+    const keyValue = input.value.trim().toUpperCase();
 
     if (!keyValue) {
         showLoginError("Vui lòng điền mã Key bản quyền!");
         return;
     }
 
-    // Hiển thị trạng thái đang xử lý để chống kẹt đơ nút bấm
+    // Đóng băng nút tạm thời tạo hiệu ứng xử lý thực tế
     btn.disabled = true;
-    btn.innerText = "ĐANG XÁC THỰC...";
+    btn.innerText = "ĐANG KIỂM TRA MÃ...";
     errorBox.style.display = "none";
 
-    try {
-        const response = await fetch(`${API_URL}/verify-key`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ key: keyValue })
-        });
+    setTimeout(() => {
+        let durationType = "";
+        let expireAt = 0;
+        const now = new Date().getTime();
 
-        const data = await response.json();
-
-        if (response.ok && data.status === "success") {
-            // Lưu thông tin phiên làm việc cục bộ
-            localStorage.setItem("phantom_key", keyValue);
-            localStorage.setItem("phantom_expire", data.expire_at);
-            localStorage.setItem("phantom_type", data.duration_type);
-            
-            // Vào thẳng menu chính
-            launchApplicationMenu(data.duration_type, data.expire_at);
+        // Tự động phân loại hạn dùng dựa trên tiền tố của mã Key bạn nhập
+        if (keyValue.startsWith("KEY1_")) {
+            durationType = "1";
+            expireAt = now + (1 * 24 * 60 * 60 * 1000); // 1 Ngày
+        } else if (keyValue.startsWith("KEY7_")) {
+            durationType = "7";
+            expireAt = now + (7 * 24 * 60 * 60 * 1000); // 7 Ngày
+        } else if (keyValue.startsWith("KEY30_")) {
+            durationType = "30";
+            expireAt = now + (30 * 24 * 60 * 60 * 1000); // 30 Ngày
+        } else if (keyValue.startsWith("KEYVV_")) {
+            durationType = "vinhvien";
+            expireAt = 0; // Vĩnh viễn
         } else {
-            showLoginError(data.message || "Mã Key không hợp lệ!");
+            // Nếu nhập key bừa không đúng cấu trúc
+            showLoginError("Mã Key bản quyền không hợp lệ hoặc sai cấu trúc!");
             btn.disabled = false;
             btn.innerText = "KÍCH HOẠT HỆ THỐNG";
+            return;
         }
-    } catch (err) {
-        showLoginError("Lỗi: Hãy chắc chắn bạn đã khởi chạy file bot.py!");
-        btn.disabled = false;
-        btn.innerText = "KÍCH HOẠT HỆ THỐNG";
-    }
-}
 
-async function autoVerifySavedKey(key) {
-    try {
-        const response = await fetch(`${API_URL}/verify-key`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ key: key })
-        });
-        const data = await response.json();
-        if (response.ok && data.status === "success") {
-            launchApplicationMenu(data.duration_type, data.expire_at);
-        } else {
-            executeForcedExit("Phiên đăng nhập cũ đã hết hạn!");
-        }
-    } catch (err) {
-        // Không kết nối được server thì yêu cầu đăng nhập lại
-        localStorage.clear();
-    }
+        // Lưu thông tin phiên làm việc cục bộ vào trình duyệt
+        localStorage.setItem("phantom_key", keyValue);
+        localStorage.setItem("phantom_expire", expireAt);
+        localStorage.setItem("phantom_type", durationType);
+        
+        // Mở khóa vào thẳng Menu chính
+        launchApplicationMenu(durationType, expireAt);
+        
+    }, 800); // Tạo độ trễ phản hồi mượt mà 0.8 giây
 }
 
 function showLoginError(msg) {
     const errorBox = document.getElementById("login-error");
     errorBox.innerText = msg;
     errorBox.style.display = "block";
+    errorBox.style.color = "var(--red)";
 }
 
 // ==========================================
@@ -105,38 +101,20 @@ function launchApplicationMenu(type, expireAt) {
         const date = new Date(expireAt);
         expiryDisplay.innerText = date.toLocaleString('vi-VN');
 
-        // Khởi chạy vòng lặp kiểm tra liên tục (mỗi 3 giây)
+        // Khởi chạy vòng lặp kiểm tra thời gian cục bộ (mỗi 2 giây)
         if (sessionInterval) clearInterval(sessionInterval);
         
-        sessionInterval = setInterval(async () => {
-            const currentKey = localStorage.getItem("phantom_key");
+        sessionInterval = setInterval(() => {
             const now = new Date().getTime();
-
-            // Tình huống 1: Thời gian máy tính vượt mốc hết hạn của Key
+            // Nếu đồng hồ máy tính vượt mốc hết hạn -> Tự động trục xuất
             if (now > expireAt) {
                 clearInterval(sessionInterval);
-                executeForcedExit("Mã Key của bạn đã hết hạn sử dụng!");
-                return;
+                executeForcedExit("Mã Key sử dụng của bạn đã hết thời hạn bản quyền!");
             }
-
-            // Tình huống 2: Kiểm tra ngầm xem Bot backend đã xóa Key này chưa
-            try {
-                const res = await fetch(`${API_URL}/verify-key`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ key: currentKey })
-                });
-                if (!res.ok) {
-                    clearInterval(sessionInterval);
-                    executeForcedExit("Key đã bị xóa tự động khỏi máy chủ hệ thống!");
-                }
-            } catch (e) {
-                // Mất kết nối server tạm thời không văng để tránh lag mạng cục bộ
-            }
-        }, 3000);
+        }, 2000);
     }
     
-    // Tự động vẽ lại biểu đồ RAM ngay khi vào menu
+    // Cập nhật biểu đồ hiển thị
     setTimeout(() => { if(ramChartInstance) ramChartInstance.update(); }, 200);
 }
 
@@ -145,7 +123,6 @@ function executeForcedExit(reason) {
     localStorage.clear();
     alert(`[HỆ THỐNG]: ${reason}`);
     
-    // Đẩy ngược lại màn hình khóa login ban đầu
     document.getElementById("main-screen").classList.remove("active");
     document.getElementById("login-screen").classList.add("active");
     
@@ -156,7 +133,7 @@ function executeForcedExit(reason) {
 }
 
 // ==========================================
-// 3. ĐIỀU HƯỚNG TAB & HIỆU ỨNG LED
+// 3. ĐIỀU HƯỚNG TAB
 // ==========================================
 
 function switchTabMenu(tabId, element) {
@@ -179,8 +156,6 @@ function updateThemeBaseColor(hexColor) {
 function initSystemTelemetry() {
     const consoleBox = document.getElementById("console-log");
     const ramValueText = document.getElementById("ram-usage-text");
-    
-    // Thiết lập biểu đồ RAM đồ họa Canvas mượt mà
     const canvas = document.getElementById("ramChart");
     if (!canvas) return;
     
@@ -188,12 +163,9 @@ function initSystemTelemetry() {
     const maxPoints = 15;
     const ramData = Array(maxPoints).fill(45);
 
-    // Hàm vẽ biểu đồ thủ công để triệt tiêu lỗi không load được thư viện ngoài
     ramChartInstance = {
         update: function() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Vẽ lưới nền mờ
             ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
             ctx.lineWidth = 1;
             for(let i = 1; i < 4; i++) {
@@ -201,11 +173,9 @@ function initSystemTelemetry() {
                 ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
             }
 
-            // Vẽ đường đồ thị biểu diễn RAM tiêu thụ
             ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() || "#a855f7";
             ctx.lineWidth = 3;
             ctx.beginPath();
-            
             for (let i = 0; i < ramData.length; i++) {
                 let x = (canvas.width / (maxPoints - 1)) * i;
                 let y = canvas.height - (ramData[i] * canvas.height / 100);
@@ -220,14 +190,12 @@ function initSystemTelemetry() {
         }
     };
 
-    // Vòng lặp liên tục tạo tài nguyên biến thiên RAM
     setInterval(() => {
         if (document.getElementById("tab-live").classList.contains("active")) {
             let currentUsage = Math.floor(Math.random() * (72 - 40 + 1)) + 40;
             ramValueText.innerText = currentUsage + "%";
             ramChartInstance.addData(currentUsage);
 
-            // Đẩy dòng text trạng thái vào console chạy chữ
             let logLine = document.createElement("div");
             logLine.className = "line";
             logLine.innerText = `[RAM_MONITOR] Khối bộ nhớ phân mảnh ổn định. Đang dùng: ${currentUsage}%`;

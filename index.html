@@ -3,38 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHANTOM ELITE MENU</title>
+    <title>PHANTOM ASSISTANT</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body>
 
-    <!-- MÀN HÌNH ĐĂNG NHẬP KEY -->
+    <!-- KHUNG ĐĂNG NHẬP KHÓA LED -->
     <div id="login-screen" class="screen active">
         <div class="login-box">
             <div class="logo"><i class="fa-solid fa-skull"></i> PHANTOM</div>
             <p>Vui lòng điền mã KEY bản quyền để kích hoạt hệ thống</p>
-            <input type="text" id="key-input" placeholder="Nhập Key của bạn tại đây...">
+            <input type="text" id="key-input" placeholder="Nhập Key của bạn...">
             <button id="btn-activate" onclick="validateKeyWithServer()">KÍCH HOẠT HỆ THỐNG</button>
             <div id="login-error" class="error-msg"></div>
         </div>
     </div>
 
-    <!-- MÀN HÌNH CHÍNH CỦA MENU -->
+    <!-- KHUNG MENU CHÍNH -->
     <div id="main-screen" class="screen">
         <header>
             <div class="brand">
                 <i class="fa-solid fa-skull brand-logo"></i>
                 <div>
                     <h1>PHANTOM</h1>
-                    <span class="sub">ULTIMATE GAME ASSISTANT</span>
+                    <span class="sub">ULTIMATE ASSISTANT</span>
                 </div>
             </div>
             <div class="status-panel">
                 <span class="badge vip">VIP SYSTEM</span>
                 <div class="status-info">
-                    <div>STATUS: <span class="text-green">UNDETECTED</span></div>
-                    <div>EXPIRES: <span id="key-expiry" class="text-yellow">-</span></div>
+                    <div>TRẠNG THÁI: <span class="text-green">ACTIVE</span></div>
+                    <div>HẠN DÙNG: <span id="key-expiry" class="text-yellow">-</span></div>
                 </div>
             </div>
         </header>
@@ -43,81 +43,80 @@
             <!-- TAB 1: HOME -->
             <section id="tab-home" class="tab-panel active">
                 <div class="card profile-card">
-                    <img src="https://dicebear.com" alt="Admin" class="avatar" width="60">
+                    <div class="avatar-box"><i class="fa-solid fa-user-shield"></i></div>
                     <div class="profile-info">
                         <h3>ADMIN Tấn Dũng</h3>
-                        <p>Hỗ trợ tối ưu hóa phần mềm và cấu hình bảo mật hệ thống.</p>
+                        <p>Hệ thống tối ưu cấu trúc nhân luồng và bộ nhớ game FPS cao cấp.</p>
                     </div>
                 </div>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/share/1Cz7sV86Ur/?mibextid=wwXIfr" target="_blank" class="btn-social fb"><i class="fa-brands fa-facebook"></i> Facebook Admin</a>
+                    <a href="https://www.facebook.com/share/1Cz7sV86Ur/?mibextid=wwXIfr" target="_blank" class="btn-social fb"><i class="fa-brands fa-facebook"></i> Liên Hệ Facebook</a>
                     <a href="https://www.tiktok.com/@tandungluvyou206?_r=1&_t=ZS-96lXEfKu8V6" target="_blank" class="btn-social tt"><i class="fa-brands fa-tiktok"></i> Kênh Tiktok</a>
-                    <a href="0394106914" target="_blank" class="btn-social zl"><i class="fa-solid fa-comment"></i> Box Chat Zalo</a>
+                    <a href="0394106914" target="_blank" class="btn-social zl"><i class="fa-solid fa-comment"></i> Nhóm Zalo Hỗ Trợ</a>
                 </div>
             </section>
 
-            <!-- TAB 2: FUNC (7 nút gạt) -->
+            <!-- TAB 2: FUNC (Mặc định TẮT - Tự bật) -->
             <section id="tab-func" class="tab-panel">
                 <h2>CHỨC NĂNG BẬT (FUNC)</h2>
                 <div class="switch-grid">
-                    <div class="switch-item"><span>Aimbot Thân (Lock Chest)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="switch-item"><span>Aimbot Đầu (Auto Headshot)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="switch-item"><span>Hiện Khung Địch (ESP Box)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="switch-item"><span>Hiện Thanh Máu (ESP HP)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="switch-item"><span>Hiện Tên Khoảng Cách</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="switch-item"><span>Hiện Đường Kẻ Giao Tranh</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="switch-item"><span>Xuyên Tường Vật Thể</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="switch-item"><span>Ngắm Khóa Mục Tiêu (Aimbot Body)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="switch-item"><span>Tự Động Headshot (Aimbot Head)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="switch-item"><span>Hiện Khung Khớp Xương (ESP Box)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="switch-item"><span>Hiển Thị Lượng Máu (ESP HP)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="switch-item"><span>Hiện Tên Người Chơi (ESP Name)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="switch-item"><span>Đo Khoảng Cách Radar (ESP Dist)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="switch-item"><span>Xuyên Tường Bản Đồ (Wallhack)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
                 </div>
             </section>
 
-            <!-- TAB 3: BOOST (7 Thanh kéo Range) -->
+            <!-- TAB 3: BOOST (7 Thanh kéo slider điều chỉnh tăng tốc hệ thống) -->
             <section id="tab-boost" class="tab-panel">
-                <h2>CẤU HÌNH TỐI ƯU KÉO (BOOST)</h2>
+                <h2>CẤU HÌNH KÉO TỐI ƯU (BOOST)</h2>
                 <div class="range-grid">
-                    <div class="range-item"><div class="range-label"><span>Ép Xung CPU Hiệu Năng</span><span class="range-value">50%</span></div><input type="range" class="range-slider" min="0" max="100" value="50" oninput="updateRangeText(this)"></div>
-                    <div class="range-item"><div class="range-label"><span>Tối Ưu Tốc Độ GPU</span><span class="range-value">70%</span></div><input type="range" class="range-slider" min="0" max="100" value="70" oninput="updateRangeText(this)"></div>
-                    <div class="range-item"><div class="range-label"><span>Xóa Bộ Nhớ Đệm Ẩn</span><span class="range-value">40%</span></div><input type="range" class="range-slider" min="0" max="100" value="40" oninput="updateRangeText(this)"></div>
-                    <div class="range-item"><div class="range-label"><span>Độ Nhạy Phản Hồi Chuột</span><span class="range-value">90%</span></div><input type="range" class="range-slider" min="0" max="100" value="90" oninput="updateRangeText(this)"></div>
-                    <div class="range-item"><div class="range-label"><span>Băng Thông Mạng Chơi Game</span><span class="range-value">60%</span></div><input type="range" class="range-slider" min="0" max="100" value="60" oninput="updateRangeText(this)"></div>
-                    <div class="range-item"><div class="range-label"><span>Bộ Lọc Khung Hình FPS</span><span class="range-value">80%</span></div><input type="range" class="range-slider" min="0" max="100" value="80" oninput="updateRangeText(this)"></div>
-                    <div class="range-item"><div class="range-label"><span>Chế Độ Gaming Mode</span><span class="range-value">100%</span></div><input type="range" class="range-slider" min="0" max="100" value="100" oninput="updateRangeText(this)"></div>
+                    <div class="range-item"><div><span>Ép Xung Hiệu Năng CPU</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
+                    <div class="range-item"><div><span>Tăng Tốc Xử Lý Đồ Họa GPU</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
+                    <div class="range-item"><div><span>Tốc Độ Giải Phóng Bộ Nhớ Đệm</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
+                    <div class="range-item"><div><span>Ưu Tiên Băng Thông Truyền Tải</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
+                    <div class="range-item"><div><span>Bộ Khử Trễ Tín Hiệu (Anti-Lag)</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
+                    <div class="range-item"><div><span>Khóa Ghim Thước Khung Hình FPS</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
+                    <div class="range-item"><div><span>Kích Hoạt Nhân Gaming Mode</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
                 </div>
             </section>
 
-            <!-- TAB 4: LIVE (Hiện Ram, Dọn Ram, Biểu đồ Canvas & Console Log) -->
+            <!-- TAB 4: LIVE (Biểu đồ RAM vẽ bằng canvas, nút dọn RAM và Console) -->
             <section id="tab-live" class="tab-panel">
-                <h2>THEO DÕI HỆ THỐNG LIVE</h2>
-                <div class="ram-monitor">
-                    <div class="ram-text">Dung lượng RAM: <span id="ram-usage-text" class="text-yellow">0%</span></div>
-                    <button class="btn-clear" onclick="runRamClearProcess()">ĐỌN RAM</button>
+                <h2>GIÁM SÁT HỆ THỐNG REAL-TIME</h2>
+                <div class="ram-monitor-box">
+                    <div class="ram-info-row">
+                        <span>Dung Lượng RAM Đang Dùng:</span>
+                        <span id="ram-usage-text" class="text-yellow">0%</span>
+                    </div>
+                    <!-- Biểu đồ đồ họa Canvas hoàn chỉnh -->
+                    <canvas id="ramChart" width="350" height="100"></canvas>
+                    <button class="btn-clear-ram" onclick="runRamClearProcess()">ĐỌN RAM</button>
                 </div>
-                
-                <!-- Khung chứa đồ thị biểu đồ RAM mượt mà -->
-                <div class="chart-container">
-                    <canvas id="ramChart" width="340" height="120"></canvas>
-                </div>
-
                 <div class="console-box" id="console-log">
-                    <div class="line yellow">[HỆ THỐNG] Đang đồng bộ hóa cổng dữ liệu thời gian thực...</div>
+                    <div class="line yellow">[HỆ THỐNG]: Đang kết nối cổng đồng bộ dữ liệu phần cứng...</div>
                 </div>
             </section>
 
             <!-- TAB 5: CÀI ĐẶT -->
             <section id="tab-cai-dat" class="tab-panel">
-                <h2>CÀI ĐẶT CẤU HÌNH</h2>
-                <div class="setting-item">
-                    <span>Màu chủ đạo LED (RGB)</span>
+                <h2>CÀI ĐẶT ỨNG DỤNG</h2>
+                <div class="setting-row">
+                    <span>Màu sắc LED hiển thị chủ đạo</span>
                     <input type="color" id="theme-color" value="#a855f7" onchange="applyCustomTheme(this.value)">
                 </div>
-                <div class="setting-item">
-                    <span>Khởi động cùng thiết bị</span>
-                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                <div class="setting-row">
+                    <span>Tự động khởi động cùng thiết bị</span>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
                 </div>
-                <button class="btn-logout" onclick="handleManualLogout()">Đăng Xuất (Xóa Key Hệ Thống)</button>
+                <button class="btn-logout" onclick="handleManualLogout()">ĐĂNG XUẤT (XÓA KEY LƯU TRỮ)</button>
             </section>
         </main>
 
-        <!-- THANH MENU 5 TABS -->
+        <!-- THANH 5 TAB ĐIỀU HƯỚNG DƯỚI CÙNG -->
         <nav class="bottom-nav">
             <div class="nav-item active" onclick="switchTabMenu('tab-home', this)"><i class="fa-solid fa-house"></i><span>HOME</span></div>
             <div class="nav-item" onclick="switchTabMenu('tab-func', this)"><i class="fa-solid fa-crosshairs"></i><span>FUNC</span></div>
