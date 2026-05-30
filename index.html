@@ -2,127 +2,147 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHANTOM ASSISTANT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PHANTOM X - Premium Control Panel</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cloudflare.com">
 </head>
-<body>
+<body class="theme-purple">
+    <div class="led-border"></div>
 
-    <!-- KHUNG ĐĂNG NHẬP KHÓA LED -->
-    <div id="login-screen" class="screen active">
-        <div class="login-box">
-            <div class="logo"><i class="fa-solid fa-skull"></i> PHANTOM</div>
-            <p>Vui lòng điền mã KEY bản quyền để kích hoạt hệ thống</p>
-            <input type="text" id="key-input" placeholder="Nhập Key của bạn...">
-            <button id="btn-activate" onclick="validateKeyWithServer()">KÍCH HOẠT HỆ THỐNG</button>
-            <div id="login-error" class="error-msg"></div>
+    <audio id="snd-click" src="https://mixkit.co" preload="auto"></audio>
+    <audio id="snd-toggle" src="https://mixkit.co" preload="auto"></audio>
+    <audio id="snd-slide" src="https://mixkit.co" preload="auto"></audio>
+
+    <!-- MÀN HÌNH KHÓA XÁC THỰC -->
+    <div id="auth-screen" class="glass-box">
+        <div class="auth-logo">
+            <div class="icon-glow">🌐</div>
+            <h2>PHANTOM <span>X</span></h2>
+            <p>HỆ THỐNG KIỂM SOÁT BẢN QUYỀN</p>
         </div>
+        <div class="input-container">
+            <input type="text" id="key-input" placeholder="Nhập Key kích hoạt của bạn...">
+        </div>
+        <button type="button" onclick="checkKey()">KÍCH HOẠT NGAY</button>
+        <p id="auth-error" class="error-msg"></p>
     </div>
 
-    <!-- KHUNG MENU CHÍNH -->
-    <div id="main-screen" class="screen">
-        <header>
-            <div class="brand">
-                <i class="fa-solid fa-skull brand-logo"></i>
-                <div>
-                    <h1>PHANTOM</h1>
-                    <span class="sub">ULTIMATE ASSISTANT</span>
-                </div>
-            </div>
-            <div class="status-panel">
-                <span class="badge vip">VIP SYSTEM</span>
-                <div class="status-info">
-                    <div>TRẠNG THÁI: <span class="text-green">ACTIVE</span></div>
-                    <div>HẠN DÙNG: <span id="key-expiry" class="text-yellow">-</span></div>
-                </div>
-            </div>
+    <!-- GIAO DIỆN CHÍNH ỨNG DỤNG -->
+    <div id="main-app" class="hidden">
+        <header class="app-header">
+            <div class="app-logo">⚡ PHANTOM <span>PRO</span></div>
+            <div class="status-badge"><span class="pulse-dot"></span> UNDETECTED</div>
         </header>
 
-        <main class="tab-content">
-            <!-- TAB 1: HOME -->
+        <main class="glass-box main-content">
+            <!-- TAB HOME (ĐÃ TÍCH HỢP Ô CHÈN ẢNH AVATAR) -->
             <section id="tab-home" class="tab-panel active">
-                <div class="card profile-card">
-                    <div class="avatar-box"><i class="fa-solid fa-user-shield"></i></div>
-                    <div class="profile-info">
-                        <h3>ADMIN Tấn Dũng</h3>
-                        <p>Hệ thống tối ưu cấu trúc nhân luồng và bộ nhớ game FPS cao cấp.</p>
+                <div class="admin-premium-card">
+                    <div class="avatar-wrapper">
+                        <div class="avatar-ring"></div>
+                        <!-- Ô chứa ảnh đại diện hình tròn -->
+                        <div class="avatar-main">
+                            <!-- BẠN CHỈ CẦN THAY TÊN FILE ẢNH CỦA BẠN VÀO CHỖ "avatar.png" LÀ ĐƯỢC -->
+                            <img src="https://i.ibb.co/W4VZPzqN/2a-Obo-QYi-JQb9-Xyhw4-HU9lx-Vt-U1vz-CSGmj-PWBAXx-I.jpg" alt="Admin" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block;">
+                        </div>
+                    </div>
+                    <h4>TẤN DŨNG DEVELOPER</h4>
+                    <span class="badge-role">FOUNDER & CEO</span>
+                    <p class="admin-bio">Chuyên cung cấp giải pháp tối ưu hệ thống, bảo mật phần mềm nâng cao và tối ưu hóa hiệu năng phần cứng trò chơi.</p>
+                </div>
+                
+                <div class="expiry-card-premium">
+                    <div class="exp-icon">🔑</div>
+                    <div class="exp-info" style="width: 100%;">
+                        <span class="exp-title">THỜI HẠN BẢN QUYỀN TRỰC TUYẾN</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                            <span id="key-display" class="exp-value">Chưa kích hoạt</span>
+                            <span id="key-countdown" class="sub-text" style="color: var(--primary); font-family: monospace; font-weight: bold; font-size: 13px; text-shadow: 0 0 5px var(--primary-glow);">00:00:00</span>
+                        </div>
                     </div>
                 </div>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/share/1Cz7sV86Ur/?mibextid=wwXIfr" target="_blank" class="btn-social fb"><i class="fa-brands fa-facebook"></i> Liên Hệ Facebook</a>
-                    <a href="https://www.tiktok.com/@tandungluvyou206?_r=1&_t=ZS-96lXEfKu8V6" target="_blank" class="btn-social tt"><i class="fa-brands fa-tiktok"></i> Kênh Tiktok</a>
-                    <a href="0394106914" target="_blank" class="btn-social zl"><i class="fa-solid fa-comment"></i> Nhóm Zalo Hỗ Trợ</a>
+
+                <div class="social-section-premium">
+                    <h5>KÊNH LIÊN HỆ CHÍNH THỨC</h5>
+                    <div class="social-grid-modern">
+                        <a href="https://www.facebook.com/share/1Cz7sV86Ur/?mibextid=wwXIfr" target="_blank" class="social-item-mod fb-mod">
+                            <span class="icon">👥</span> Facebook
+                        </a>
+                        <a href="https://zalo.me/g/hh9rx4rmh34mz4xprive" target="_blank" class="social-item-mod zl-mod">
+                            <span class="icon">💬</span> Zalo Chat
+                        </a>
+                        <a href="https://www.tiktok.com/@tandungluvyou206?_r=1&_t=ZS-96lXEfKu8V6" target="_blank" class="social-item-mod tt-mod">
+                            <span class="icon">🎵</span> TikTok
+                        </a>
+                    </div>
                 </div>
             </section>
 
-            <!-- TAB 2: FUNC (Mặc định TẮT - Tự bật) -->
+            <!-- TAB FUNC -->
             <section id="tab-func" class="tab-panel">
-                <h2>CHỨC NĂNG BẬT (FUNC)</h2>
-                <div class="switch-grid">
-                    <div class="switch-item"><span>Ngắm Khóa Mục Tiêu (Aimbot Body)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="switch-item"><span>Tự Động Headshot (Aimbot Head)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="switch-item"><span>Hiện Khung Khớp Xương (ESP Box)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="switch-item"><span>Hiển Thị Lượng Máu (ESP HP)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="switch-item"><span>Hiện Tên Người Chơi (ESP Name)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="switch-item"><span>Đo Khoảng Cách Radar (ESP Dist)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                    <div class="switch-item"><span>Xuyên Tường Bản Đồ (Wallhack)</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                </div>
+                <h3>⚙ Chức Năng Hệ Thống</h3>
+                <div class="control-list" id="func-container"></div>
             </section>
 
-            <!-- TAB 3: BOOST (7 Thanh kéo slider điều chỉnh tăng tốc hệ thống) -->
+            <!-- TAB BOOST -->
             <section id="tab-boost" class="tab-panel">
-                <h2>CẤU HÌNH KÉO TỐI ƯU (BOOST)</h2>
-                <div class="range-grid">
-                    <div class="range-item"><div><span>Ép Xung Hiệu Năng CPU</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
-                    <div class="range-item"><div><span>Tăng Tốc Xử Lý Đồ Họa GPU</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
-                    <div class="range-item"><div><span>Tốc Độ Giải Phóng Bộ Nhớ Đệm</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
-                    <div class="range-item"><div><span>Ưu Tiên Băng Thông Truyền Tải</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
-                    <div class="range-item"><div><span>Bộ Khử Trễ Tín Hiệu (Anti-Lag)</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
-                    <div class="range-item"><div><span>Khóa Ghim Thước Khung Hình FPS</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
-                    <div class="range-item"><div><span>Kích Hoạt Nhân Gaming Mode</span><span class="range-val">0%</span></div><input type="range" min="0" max="100" value="0" class="custom-range"></div>
-                </div>
+                <h3>🚀 Tối Ưu Tốc Độ</h3>
+                <div class="control-list" id="boost-container"></div>
             </section>
 
-            <!-- TAB 4: LIVE (Biểu đồ RAM vẽ bằng canvas, nút dọn RAM và Console) -->
+            <!-- TAB LIVE -->
             <section id="tab-live" class="tab-panel">
-                <h2>GIÁM SÁT HỆ THỐNG REAL-TIME</h2>
-                <div class="ram-monitor-box">
-                    <div class="ram-info-row">
-                        <span>Dung Lượng RAM Đang Dùng:</span>
-                        <span id="ram-usage-text" class="text-yellow">0%</span>
-                    </div>
-                    <!-- Biểu đồ đồ họa Canvas hoàn chỉnh -->
-                    <canvas id="ramChart" width="350" height="100"></canvas>
-                    <button class="btn-clear-ram" onclick="runRamClearProcess()">ĐỌN RAM</button>
+                <div class="live-header-hud">
+                    <h3>📊 PHÂN TÍCH BỘ NHỚ RAM</h3>
+                    <div class="live-badge-realtime" id="ram-percentage">0%</div>
                 </div>
-                <div class="console-box" id="console-log">
-                    <div class="line yellow">[HỆ THỐNG]: Đang kết nối cổng đồng bộ dữ liệu phần cứng...</div>
+                
+                <div class="chart-box-premium">
+                    <div class="chart-overlay-glow"></div>
+                    <div class="hud-bars" id="hud-bars-container">
+                        <div class="bar" style="height: 40%"></div>
+                        <div class="bar" style="height: 55%"></div>
+                        <div class="bar" style="height: 48%"></div>
+                        <div class="bar" style="height: 60%"></div>
+                        <div class="bar" style="height: 52%"></div>
+                        <div class="bar" style="height: 68%"></div>
+                        <div class="bar" style="height: 50%"></div>
+                        <div class="bar" style="height: 58%"></div>
+                        <div class="bar" style="height: 42%"></div>
+                        <div class="bar" style="height: 45%"></div>
+                    </div>
+                </div>
+                
+                <div class="console-box">
+                    <div class="console-header">
+                        <span>TERMINAL MONITOR</span>
+                        <button class="btn-clear" onclick="clearConsole()">DỌN CHẠY</button>
+                    </div>
+                    <div class="console-logs" id="console-output">> Hệ thống đã sẵn sàng xử lý...</div>
                 </div>
             </section>
 
-            <!-- TAB 5: CÀI ĐẶT -->
-            <section id="tab-cai-dat" class="tab-panel">
-                <h2>CÀI ĐẶT ỨNG DỤNG</h2>
+            <!-- TAB CÀI ĐẶT -->
+            <section id="tab-setting" class="tab-panel">
+                <h3>🎨 Tùy Biến Giao Diện</h3>
                 <div class="setting-row">
-                    <span>Màu sắc LED hiển thị chủ đạo</span>
-                    <input type="color" id="theme-color" value="#a855f7" onchange="applyCustomTheme(this.value)">
+                    <label>Màu nền Neon đang Hot:</label>
+                    <select id="theme-picker" onchange="changeTheme(this.value)">
+                        <option value="theme-purple">Cyber Purple (Mặc định)</option>
+                        <option value="theme-cyan">Electric Cyan</option>
+                        <option value="theme-emerald">Emerald Mint</option>
+                    </select>
                 </div>
-                <div class="setting-row">
-                    <span>Tự động khởi động cùng thiết bị</span>
-                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                </div>
-                <button class="btn-logout" onclick="handleManualLogout()">ĐĂNG XUẤT (XÓA KEY LƯU TRỮ)</button>
             </section>
         </main>
 
-        <!-- THANH 5 TAB ĐIỀU HƯỚNG DƯỚI CÙNG -->
-        <nav class="bottom-nav">
-            <div class="nav-item active" onclick="switchTabMenu('tab-home', this)"><i class="fa-solid fa-house"></i><span>HOME</span></div>
-            <div class="nav-item" onclick="switchTabMenu('tab-func', this)"><i class="fa-solid fa-crosshairs"></i><span>FUNC</span></div>
-            <div class="nav-item" onclick="switchTabMenu('tab-boost', this)"><i class="fa-solid fa-rocket"></i><span>BOOST</span></div>
-            <div class="nav-item" onclick="switchTabMenu('tab-live', this)"><i class="fa-solid fa-satellite-dish"></i><span>LIVE</span></div>
-            <div class="nav-item" onclick="switchTabMenu('tab-cai-dat', this)"><i class="fa-solid fa-gear"></i><span>CÀI ĐẶT</span></div>
+        <!-- THANH ĐIỀU HƯỚNG DOCK MENU -->
+        <nav class="bottom-dock">
+            <button class="dock-btn active" onclick="switchTab('tab-home')">HOME</button>
+            <button class="dock-btn" onclick="switchTab('tab-func')">FUNC</button>
+            <button class="dock-btn" onclick="switchTab('tab-boost')">BOOST</button>
+            <button class="dock-btn" onclick="switchTab('tab-live')">LIVE</button>
+            <button class="dock-btn" onclick="switchTab('tab-setting')">CÀI ĐẶT</button>
         </nav>
     </div>
 
